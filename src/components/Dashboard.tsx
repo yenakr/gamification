@@ -35,6 +35,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
     return count;
   };
 
+  const getRankName = (lvl: number) => {
+    if (lvl === 1) return '초보 돌보미';
+    if (lvl === 2) return '주니어 돌보미';
+    if (lvl === 3) return '시니어 돌보미';
+    if (lvl === 4) return '전문 돌보미';
+    return '마스터 돌보미';
+  };
+
   const totalParts = quizData.reduce((acc, cat) => acc + cat.parts.length, 0);
   const totalBadges = Object.values(badges).filter(Boolean).length;
   const xpPercent = Math.min(100, Math.floor((xp / xpToNextLevel) * 100));
@@ -76,21 +84,21 @@ export const Dashboard: React.FC<DashboardProps> = ({
           sfx.playClick();
           setShowXpModal(true);
         }}
-        title="클릭하여 레벨업 조건 확인"
+        title="클릭하여 레벨 기준 및 획득 조건 보기"
       >
         <div className="player-avatar-section">
           <div className="avatar-frame">
             <span className="avatar-emoji">🌟</span>
           </div>
           <div className="player-info">
-            <h2 className="player-rank">초보 돌보미</h2>
+            <h2 className="player-rank">{getRankName(level)}</h2>
             <div className="level-badge">LV. {level}</div>
           </div>
         </div>
 
         <div className="stats-progress-section">
           <div className="stat-row">
-            <span>EXP 경험치 (클릭하여 레벨업 정보 보기)</span>
+            <span>EXP 경험치</span>
             <span>{xp} / {xpToNextLevel}</span>
           </div>
           <div className="progress-bar-container">
@@ -108,13 +116,25 @@ export const Dashboard: React.FC<DashboardProps> = ({
       {showXpModal && (
         <div className="level-up-overlay slide-up-anim" onClick={() => setShowXpModal(false)}>
           <div className="level-up-alert card-glow" onClick={(e) => e.stopPropagation()}>
-            <span className="lvl-alert-emoji">⭐ 레벨업 가이드 ⭐</span>
-            <h2>경험치(XP) 획득 및 레벨업 조건</h2>
-            <p style={{ margin: '12px 0', textAlign: 'left', lineHeight: '1.6' }}>
-              • <strong>사전 퀴즈 완료:</strong> +25 XP<br />
-              • <strong>최종 테스트 완료:</strong> +60 XP<br />
-              • 경험치가 목표 수치(현재 {xpToNextLevel} XP)에 도달하면 레벨이 오르고, 다음 목표 수치가 증가합니다.
-            </p>
+            <span className="lvl-alert-emoji">⭐ 돌보미 등급 안내 ⭐</span>
+            <h2>돌보미 등급 및 경험치 기준</h2>
+            
+            <div style={{ margin: '20px 0', textAlign: 'left', lineHeight: '1.6', fontSize: '0.95rem' }}>
+              <div style={{ marginBottom: '16px', paddingBottom: '16px', borderBottom: '1px dotted rgba(0,0,0,0.12)' }}>
+                <strong style={{ color: 'var(--color-primary)', display: 'block', marginBottom: '8px' }}>📋 등급별 호칭</strong>
+                • LV. 1 : 초보 돌보미<br />
+                • LV. 2 : 주니어 돌보미<br />
+                • LV. 3 : 시니어 돌보미<br />
+                • LV. 4 : 전문 돌보미<br />
+                • LV. 5+ : 마스터 돌보미
+              </div>
+              <div>
+                <strong style={{ color: 'var(--color-primary)', display: 'block', marginBottom: '8px' }}>⚡ 경험치 획득 기준</strong>
+                • 사전 퀴즈 완료: <strong>+25 XP</strong><br />
+                • 최종 테스트(사후 퀴즈) 완료: <strong>+60 XP</strong>
+              </div>
+            </div>
+
             <button className="primary-btn" onClick={() => setShowXpModal(false)}>확인</button>
           </div>
         </div>
