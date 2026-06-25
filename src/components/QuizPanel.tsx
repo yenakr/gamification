@@ -88,9 +88,9 @@ export const QuizPanel: React.FC<QuizPanelProps> = ({
   if (isGameOver) {
     return (
       <div className="quiz-result-panel game-over-card text-center card-glow">
-        <span className="game-over-emoji animate-bounce">💀</span>
-        <h2 className="result-title text-red">MISSION FAILED</h2>
-        <p className="result-subtitle">체력이 모두 소진되었습니다. 다시 도전하여 로봇 마스터가 되어보세요!</p>
+        <span className="game-over-emoji animate-bounce">😢</span>
+        <h2 className="result-title text-red">퀴즈 실패</h2>
+        <p className="result-subtitle">체력이 모두 소진되었습니다. 다시 한번 도전해 보세요!</p>
         <div className="btn-group">
           <button className="primary-btn" onClick={handleRestart}>다시 시작하기</button>
           <button className="secondary-btn" onClick={onCancel}>중단하고 나가기</button>
@@ -111,7 +111,7 @@ export const QuizPanel: React.FC<QuizPanelProps> = ({
             onCancel();
           }}
         >
-          🏳️ 기권
+          🚪 나가기
         </button>
         <span className="quiz-badge">{mode === 'pre' ? '🎯 사전 진단' : '🔥 최종 테스트'} - {title}</span>
         
