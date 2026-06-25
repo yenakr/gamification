@@ -146,7 +146,13 @@ export const QuizPanel: React.FC<QuizPanelProps> = ({
         <h2 className="question-text">{currentQuestion.question}</h2>
 
         {/* Options */}
-        <div className="options-list">
+        <div className={
+          currentQuestion.options.length === 2 &&
+          currentQuestion.options.includes('O') &&
+          currentQuestion.options.includes('X')
+            ? "options-list ox-layout"
+            : "options-list"
+        }>
           {currentQuestion.options.map((option, idx) => {
             let optionClass = '';
             if (isAnswered) {
@@ -161,14 +167,18 @@ export const QuizPanel: React.FC<QuizPanelProps> = ({
               optionClass = 'interactive-opt';
             }
 
+            const isOX = currentQuestion.options.length === 2 &&
+                         currentQuestion.options.includes('O') &&
+                         currentQuestion.options.includes('X');
+
             return (
               <button 
                 key={idx}
-                className={`option-btn ${optionClass}`}
+                className={`option-btn ${optionClass} ${isOX ? 'ox-btn' : ''}`}
                 disabled={isAnswered}
                 onClick={() => handleOptionSelect(idx)}
               >
-                <span className="option-num">{idx + 1}</span>
+                {!isOX && <span className="option-num">{idx + 1}</span>}
                 <span className="option-content">{option}</span>
               </button>
             );
