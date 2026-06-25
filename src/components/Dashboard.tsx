@@ -23,7 +23,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
 }) => {
   const getCategoryCompletionCount = (catId: string) => {
     let count = 0;
-    for (let p = 1; p <= 5; p++) {
+    const cat = quizData.find(c => c.id === catId);
+    if (!cat) return 0;
+    for (let p = 1; p <= cat.parts.length; p++) {
       if (badges[`${catId}-${p}`]) {
         count++;
       }
@@ -31,6 +33,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
     return count;
   };
 
+  const totalParts = quizData.reduce((acc, cat) => acc + cat.parts.length, 0);
   const totalBadges = Object.values(badges).filter(Boolean).length;
   const xpPercent = Math.min(100, Math.floor((xp / xpToNextLevel) * 100));
 
@@ -87,7 +90,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
         <div className="badge-count-section">
           <span className="stat-label">획득 훈장</span>
-          <span className="stat-value">🏆 {totalBadges} / 25</span>
+          <span className="stat-value">🏆 {totalBadges} / {totalParts}</span>
         </div>
       </section>
 
@@ -97,7 +100,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
         <div className="categories-grid">
           {quizData.map((category) => {
             const completedCount = getCategoryCompletionCount(category.id);
-            const isCompleted = completedCount === 5;
+            const isCompleted = completedCount === category.parts.length;
 
             return (
               <div 
@@ -107,16 +110,16 @@ export const Dashboard: React.FC<DashboardProps> = ({
               >
                 <div className="card-top">
                   <span className="cat-icon">{category.icon}</span>
-                  <span className="cat-badge">{completedCount}/5 완료</span>
+                  <span className="cat-badge">{completedCount}/{category.parts.length} 완료</span>
                 </div>
                 <h3 className="cat-name">{category.name}</h3>
                 <p className="cat-desc">{category.description}</p>
                 <div className="card-footer">
                   <div className="mini-progress-track">
-                    {Array.from({ length: 5 }).map((_, idx) => (
+                    {category.parts.map((part) => (
                       <span 
-                        key={idx} 
-                        className={`mini-dot ${badges[`${category.id}-${idx + 1}`] ? 'active' : ''}`}
+                        key={part.id} 
+                        className={`mini-dot ${badges[`${category.id}-${part.id}`] ? 'active' : ''}`}
                       />
                     ))}
                   </div>
