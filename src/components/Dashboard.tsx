@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { quizData, type RobotCategory } from '../data/quizData';
 import { sfx } from '../utils/soundEffects';
 
@@ -21,6 +21,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
   isMuted,
   onToggleMute
 }) => {
+  const [showXpModal, setShowXpModal] = useState(false);
+
   const getCategoryCompletionCount = (catId: string) => {
     let count = 0;
     const cat = quizData.find(c => c.id === catId);
@@ -48,8 +50,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
         <div className="logo-section">
           <span className="logo-emoji">🤖</span>
           <div>
-            <h1 className="logo-title">Care Bot Quest</h1>
-            <p className="logo-subtitle">돌봄로봇 마스터를 향한 모험</p>
+            <h1 className="logo-title">Care Bot Quiz</h1>
+            <p className="logo-subtitle">돌봄로봇 교육 플랫폼</p>
           </div>
         </div>
         <div className="header-actions">
@@ -67,20 +69,28 @@ export const Dashboard: React.FC<DashboardProps> = ({
       </header>
 
       {/* Hero Stats */}
-      <section className="stats-board card-glow">
+      <section 
+        className="stats-board card-glow" 
+        style={{ cursor: 'pointer' }}
+        onClick={() => {
+          sfx.playClick();
+          setShowXpModal(true);
+        }}
+        title="클릭하여 레벨업 조건 확인"
+      >
         <div className="player-avatar-section">
           <div className="avatar-frame">
             <span className="avatar-emoji">🌟</span>
           </div>
           <div className="player-info">
-            <h2 className="player-rank">초보 돌봄 요원</h2>
+            <h2 className="player-rank">초보 돌보미</h2>
             <div className="level-badge">LV. {level}</div>
           </div>
         </div>
 
         <div className="stats-progress-section">
           <div className="stat-row">
-            <span>EXP 경험치</span>
+            <span>EXP 경험치 (클릭하여 레벨업 정보 보기)</span>
             <span>{xp} / {xpToNextLevel}</span>
           </div>
           <div className="progress-bar-container">
@@ -94,9 +104,25 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </section>
 
-      {/* Quest Map Area */}
+      {/* Level-Up Info Modal */}
+      {showXpModal && (
+        <div className="level-up-overlay slide-up-anim" onClick={() => setShowXpModal(false)}>
+          <div className="level-up-alert card-glow" onClick={(e) => e.stopPropagation()}>
+            <span className="lvl-alert-emoji">⭐ 레벨업 가이드 ⭐</span>
+            <h2>경험치(XP) 획득 및 레벨업 조건</h2>
+            <p style={{ margin: '12px 0', textAlign: 'left', lineHeight: '1.6' }}>
+              • <strong>사전 퀴즈 완료:</strong> +25 XP<br />
+              • <strong>최종 테스트 완료:</strong> +60 XP<br />
+              • 경험치가 목표 수치(현재 {xpToNextLevel} XP)에 도달하면 레벨이 오르고, 다음 목표 수치가 증가합니다.
+            </p>
+            <button className="primary-btn" onClick={() => setShowXpModal(false)}>확인</button>
+          </div>
+        </div>
+      )}
+
+      {/* Robot Categories Grid */}
       <main className="quest-map-area">
-        <h2 className="section-title">퀘스트 월드 맵</h2>
+        <h2 className="section-title">돌봄로봇 목록</h2>
         <div className="categories-grid">
           {quizData.map((category) => {
             const completedCount = getCategoryCompletionCount(category.id);
@@ -113,8 +139,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   <span className="cat-badge">{completedCount}/{category.parts.length} 완료</span>
                 </div>
                 <h3 className="cat-name">{category.name}</h3>
-                <p className="cat-desc">{category.description}</p>
-                <div className="card-footer">
+                <div className="card-footer" style={{ borderTop: 'none', marginTop: '0', paddingTop: '0' }}>
                   <div className="mini-progress-track">
                     {category.parts.map((part) => (
                       <span 
@@ -123,7 +148,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       />
                     ))}
                   </div>
-                  <button className="enter-btn">탐험 시작 →</button>
+                  <button className="enter-btn">퀴즈 풀기 →</button>
                 </div>
               </div>
             );

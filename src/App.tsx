@@ -161,7 +161,7 @@ function App() {
       {screen === 'victory' && victoryData && (
         <div className="quiz-result-panel card-glow text-center slide-up-anim">
           <span className="victory-emoji">🏆</span>
-          <h2 className="result-title text-green">STAGE CLEAR</h2>
+          <h2 className="result-title text-green">퀴즈 완료</h2>
           <p className="result-subtitle">{victoryData.title} 완료!</p>
 
           <div className="score-summary-grid">
@@ -177,12 +177,12 @@ function App() {
 
           <p className="exp-text">
             {victoryData.mode === 'pre'
-              ? '사전 퀴즈를 통과하셨습니다! 이제 학습 카드를 보며 본 과정을 익힐 준비가 완료되었습니다.'
-              : '사후 테스트에 합격하여 명예 훈장을 획득하셨습니다! 다음 스테이지가 잠금 해제됩니다.'}
+              ? '사전 퀴즈를 완료하셨습니다! 학습 가이드를 통해 본 과정을 익혀보세요.'
+              : '사후 테스트를 성공적으로 완료하여 명예 훈장을 획득하셨습니다!'}
           </p>
 
           <button className="primary-btn" onClick={handleCloseVictory}>
-            {victoryData.mode === 'pre' ? '학습하러 가기' : '퀘스트 목록으로'}
+            {victoryData.mode === 'pre' ? '학습 가이드 보기' : '목록으로'}
           </button>
         </div>
       )}
