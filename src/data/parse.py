@@ -77,7 +77,7 @@ def parse_quiz_file(file_path):
             
             parts.append({
                 'id': part_num,
-                'title': f"Part {roman}. {part_title}",
+                'title': part_title,
                 'studySlides': study_slides,
                 'preQuiz': pre_quiz,
                 'postQuiz': post_quiz

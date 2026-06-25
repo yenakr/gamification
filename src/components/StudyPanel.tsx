@@ -39,7 +39,7 @@ export const StudyPanel: React.FC<StudyPanelProps> = ({
         <h3 style={{ fontSize: '1.25rem', marginBottom: '12px', fontWeight: 800 }}>학습 자료 준비 중</h3>
         <p className="study-text" style={{ fontSize: '0.95rem', color: 'var(--text-muted)', marginBottom: '30px', lineHeight: '1.6' }}>
           본 파트의 상세 학습 교안은 준비 중입니다.<br />
-          아래 버튼을 클릭하여 바로 <strong>사후 퀴즈(최종 테스트)</strong>에 도전하실 수 있습니다!
+          아래 버튼을 클릭하여 바로 <strong>평가 퀴즈</strong>에 도전하실 수 있습니다!
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -50,7 +50,7 @@ export const StudyPanel: React.FC<StudyPanelProps> = ({
               onStartPostQuiz();
             }}
           >
-            🔥 사후 퀴즈 바로 도전!
+            🔥 평가 퀴즈 바로 도전!
           </button>
           <button 
             className="secondary-btn" 

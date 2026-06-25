@@ -178,7 +178,7 @@ function App() {
           <p className="exp-text">
             {victoryData.mode === 'pre'
               ? '사전 퀴즈를 완료하셨습니다! 학습 가이드를 통해 본 과정을 익혀보세요.'
-              : '사후 테스트를 성공적으로 완료하여 명예 훈장을 획득하셨습니다!'}
+              : '평가 퀴즈를 성공적으로 완료하여 명예 훈장을 획득하셨습니다!'}
           </p>
 
           <button className="primary-btn" onClick={handleCloseVictory}>

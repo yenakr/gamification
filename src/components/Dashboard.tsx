@@ -131,7 +131,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
               <div>
                 <strong style={{ color: 'var(--color-primary)', display: 'block', marginBottom: '8px' }}>⚡ 경험치 획득 기준</strong>
                 • 사전 퀴즈 완료: <strong>+25 XP</strong><br />
-                • 최종 테스트(사후 퀴즈) 완료: <strong>+60 XP</strong>
+                • 평가 퀴즈 완료: <strong>+60 XP</strong>
               </div>
             </div>
 

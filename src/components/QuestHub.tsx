@@ -41,7 +41,7 @@ export const QuestHub: React.FC<QuestHubProps> = ({
         <div className="category-header-info">
           <span className="cat-icon-large">{category.icon}</span>
           <div>
-            <h1 className="hub-title">{category.name} 퀴즈 목록</h1>
+            <h1 className="hub-title">{category.name}</h1>
             <p className="hub-desc">{category.description}</p>
           </div>
         </div>
@@ -58,7 +58,7 @@ export const QuestHub: React.FC<QuestHubProps> = ({
               className={`quest-row unlocked ${hasPostQuizDone ? 'completed' : ''}`}
             >
               <div className="quest-meta">
-                <div className="quest-number">파트 0{part.id}</div>
+                <div className="quest-number">Part 0{part.id}</div>
                 <h3 className="quest-title">{part.title}</h3>
               </div>
 
@@ -68,7 +68,7 @@ export const QuestHub: React.FC<QuestHubProps> = ({
                   className={`action-chip ${hasPreQuizDone ? 'done' : 'pending'}`}
                   onClick={() => handleSelect(part, 'pre', false)}
                 >
-                  {hasPreQuizDone ? '✅ 사전 퀴즈 완료' : '🎯 사전 퀴즈 시작'}
+                  {hasPreQuizDone ? '✅ 사전 퀴즈 완료' : '🎯 사전 퀴즈'}
                 </button>
 
                 {/* Step 2: Study (unlocked after pre-quiz) */}
@@ -77,7 +77,7 @@ export const QuestHub: React.FC<QuestHubProps> = ({
                   disabled={!hasPreQuizDone}
                   onClick={() => handleSelect(part, 'study', !hasPreQuizDone)}
                 >
-                  📖 학습 가이드
+                  📖 학습하기
                 </button>
 
                 {/* Step 3: Post-Quiz (unlocked after pre-quiz, badges show when finished) */}
@@ -86,7 +86,7 @@ export const QuestHub: React.FC<QuestHubProps> = ({
                   disabled={!hasPreQuizDone}
                   onClick={() => handleSelect(part, 'post', !hasPreQuizDone)}
                 >
-                  {hasPostQuizDone ? '🏆 훈장 획득 완료!' : '🔥 사후 퀴즈 도전'}
+                  {hasPostQuizDone ? '🏆 평가 퀴즈 완료!' : '🔥 평가 퀴즈 도전'}
                 </button>
               </div>
             </div>

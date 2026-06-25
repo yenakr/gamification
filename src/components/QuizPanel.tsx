@@ -113,7 +113,7 @@ export const QuizPanel: React.FC<QuizPanelProps> = ({
         >
           🚪 나가기
         </button>
-        <span className="quiz-badge">{mode === 'pre' ? '🎯 사전 진단' : '🔥 최종 테스트'} - {title}</span>
+        <span className="quiz-badge">{mode === 'pre' ? '🎯 사전 퀴즈' : '🔥 평가 퀴즈'} - {title}</span>
         
         {/* Hearts indicator */}
         <div className="hearts-track">
