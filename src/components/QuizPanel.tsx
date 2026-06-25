@@ -27,6 +27,18 @@ export const QuizPanel: React.FC<QuizPanelProps> = ({
   const [isGameOver, setIsGameOver] = useState(false);
   const [shakeScreen, setShakeScreen] = useState(false);
 
+  if (!questions || questions.length === 0) {
+    return (
+      <div className="quiz-result-panel text-center card-glow">
+        <h2 className="result-title text-red">퀴즈 없음</h2>
+        <p className="result-subtitle">이 파트에는 진행할 {mode === 'pre' ? '사전' : '평가'} 퀴즈가 준비되어 있지 않습니다.</p>
+        <div className="btn-group">
+          <button className="primary-btn" onClick={onCancel}>돌아가기</button>
+        </div>
+      </div>
+    );
+  }
+
   const currentQuestion = questions[currentIdx];
 
   const handleOptionSelect = (optionIdx: number) => {
