@@ -42,7 +42,6 @@ export const QuestHub: React.FC<QuestHubProps> = ({
           <span className="cat-icon-large">{category.icon}</span>
           <div>
             <h1 className="hub-title">{category.name}</h1>
-            <p className="hub-desc">{category.description}</p>
           </div>
         </div>
       </header>
